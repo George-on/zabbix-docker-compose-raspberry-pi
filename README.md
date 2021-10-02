@@ -7,6 +7,7 @@ The docker-compose.yml file is configured for Raspberry Pi 4 and has 3 container
 - zabbix-agent, based on [zabbix/zabbix-agent2:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-agent2)
 
 Just run the following command in the folder where the docker-compose.yml file is located:
+
 docker-compose up -d
 
 After that you can reach web interface on port 8080:
