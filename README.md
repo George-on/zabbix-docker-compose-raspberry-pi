@@ -4,7 +4,7 @@ The docker-compose.yml file is configured for Raspberry Pi 4 (especially but not
 - mysql, based on [biarms/mysql:5.5](https://hub.docker.com/r/biarms/mysql)
 - zabbix server, based on [zabbix/zabbix-server-mysql:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-server-mysql)
 - zabbix frontend, based on [zabbix/zabbix-web-apache-mysql:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-web-apache-mysql)
-- zabbix-agent, based on [zabbix/zabbix-agent2:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-agent2)
+- zabbix agent, based on [zabbix/zabbix-agent2:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-agent2)
 
 Zabbix DB is configured for **Cyrillic** and **Latin**.
 
