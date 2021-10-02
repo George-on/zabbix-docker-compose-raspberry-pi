@@ -6,9 +6,9 @@ The docker-compose.yml file is configured for Raspberry Pi 4 (especially but not
 - zabbix frontend, based on [zabbix/zabbix-web-apache-mysql:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-web-apache-mysql)
 - zabbix-agent, based on [zabbix/zabbix-agent2:alpine-5.2.5](https://hub.docker.com/r/zabbix/zabbix-agent2)
 
-Zabbix DB is configured for Cyrillic and Latin.
+Zabbix DB is configured for **Cyrillic** and **Latin**.
 
-Please replace YOUR-PASSWORD with your strong password :-)
+Please replace **YOUR-PASSWORD** with your strong password :-)
 
 Just run the following command in the folder where the docker-compose.yml file is located:
 
