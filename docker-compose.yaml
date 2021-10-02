@@ -1,0 +1,84 @@
+version: '3.1'
+
+networks:
+  network-zabbix:
+    driver: bridge
+
+services:
+
+  mysql:
+    container_name: mysql
+    image: biarms/mysql:5.5
+    restart: always
+    networks:
+      - network-zabbix
+    ports:
+      - '3306:3306'
+    volumes:
+      - './zabbix/mysql:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=YOUR-PASSWORD
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=YOUR-PASSWORD
+    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_bin']
+
+
+  zabbix-server:
+    container_name: zabbix-server
+    image: zabbix/zabbix-server-mysql:alpine-5.2.5
+    networks:
+      - network-zabbix
+    links:
+      - mysql
+    restart: always
+    ports:
+      - '10051:10051'
+    volumes:
+      - './zabbix/alertscripts:/usr/lib/zabbix/alertscripts'
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=YOUR-PASSWORD
+    depends_on:
+      - mysql
+
+  zabbix-frontend:
+    container_name: zabbix-frontend
+    image: zabbix/zabbix-web-apache-mysql:alpine-5.2.5
+    networks:
+      - network-zabbix
+    links:
+      - mysql
+    restart: always
+    ports:
+      - '8080:8080'
+      - '443:8443'
+    environment:
+      - DB_SERVER_HOST=mysql
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=YOUR-PASSWORD
+      - PHP_TZ=Europe/Kiev
+      - ZBX_SERVER_NAME=RPi2
+    depends_on:
+      - mysql
+   
+  zabbix-agent:
+    container_name: zabbix-agent
+    image: zabbix/zabbix-agent2:alpine-5.2.5
+    user: root
+    networks:
+      - network-zabbix
+    links:
+      - zabbix-server
+    restart: always
+    privileged: true
+    volumes:
+      - /var/run:/var/run
+    ports:
+      - '10050:10050'
+    environment:
+      - ZBX_HOSTNAME=zabbix-server
+      - ZBX_SERVER_HOST=zabbix-server
