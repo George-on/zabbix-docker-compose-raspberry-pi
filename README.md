@@ -10,6 +10,7 @@ Zabbix DB is configured for **Cyrillic** and **Latin**.
 
 Please replace **YOUR-PASSWORD** with your strong password :-)
 
+## Run
 Just run the following command in the folder where the docker-compose.yml file is located:
 
 <code>docker-compose up -d</code>
