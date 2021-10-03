@@ -1,4 +1,4 @@
-# Docker Compose for Raspberry Pi
+# Zabbix Docker Compose for Raspberry Pi
 
 The docker-compose.yml file is configured for Raspberry Pi 4 (especially but not limited) and has 4 containers:
 - mysql, based on [biarms/mysql:5.5](https://hub.docker.com/r/biarms/mysql)
